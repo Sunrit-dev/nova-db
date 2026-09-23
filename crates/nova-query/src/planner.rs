@@ -32,6 +32,30 @@ pub enum QueryPlan {
     },
 }
 
+impl QueryPlan {
+    /// Return a human-readable description of the execution plan strategy.
+    pub fn description(&self) -> String {
+        match self {
+            QueryPlan::IndexLookup { index_name, key, .. } => {
+                format!("IndexLookup(index: '{index_name}', key: {key:?})")
+            }
+            QueryPlan::IndexRangeScan {
+                index_name, range, ..
+            } => {
+                format!("IndexRangeScan(index: '{index_name}', range: {range:?})")
+            }
+            QueryPlan::SeqScan { filter, .. } => {
+                let status = if filter.is_some() {
+                    "filtered"
+                } else {
+                    "unfiltered"
+                };
+                format!("SeqScan({status})")
+            }
+        }
+    }
+}
+
 pub struct QueryPlanner;
 
 impl QueryPlanner {
