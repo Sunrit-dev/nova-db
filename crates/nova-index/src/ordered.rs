@@ -59,34 +59,15 @@ impl Index for OrderedIndex {
     }
 
     fn scan(&self, range: &IndexRange) -> Result<Vec<DocumentId>, IndexError> {
+        if self.entries.is_empty() {
+            return Ok(Vec::new());
+        }
+
+        let range_bounds = (range.start.as_ref(), range.end.as_ref());
         let mut results = Vec::new();
 
-        let sub_range = match (&range.start, &range.end) {
-            (std::ops::Bound::Unbounded, std::ops::Bound::Unbounded) => self.entries.range(..),
-            (std::ops::Bound::Included(s), std::ops::Bound::Unbounded) => self.entries.range(s..),
-            (std::ops::Bound::Excluded(s), std::ops::Bound::Unbounded) => self
-                .entries
-                .range((std::ops::Bound::Excluded(s), std::ops::Bound::Unbounded)),
-            (std::ops::Bound::Unbounded, std::ops::Bound::Included(e)) => self.entries.range(..=e),
-            (std::ops::Bound::Unbounded, std::ops::Bound::Excluded(e)) => self.entries.range(..e),
-            (std::ops::Bound::Included(s), std::ops::Bound::Included(e)) => {
-                self.entries.range(s..=e)
-            }
-            (std::ops::Bound::Included(s), std::ops::Bound::Excluded(e)) => {
-                self.entries.range(s..e)
-            }
-            (std::ops::Bound::Excluded(s), std::ops::Bound::Included(e)) => self
-                .entries
-                .range((std::ops::Bound::Excluded(s), std::ops::Bound::Included(e))),
-            (std::ops::Bound::Excluded(s), std::ops::Bound::Excluded(e)) => self
-                .entries
-                .range((std::ops::Bound::Excluded(s), std::ops::Bound::Excluded(e))),
-        };
-
-        for (_key, doc_set) in sub_range {
-            for doc_id in doc_set {
-                results.push(doc_id.clone());
-            }
+        for (_key, doc_set) in self.entries.range(range_bounds) {
+            results.extend(doc_set.iter().cloned());
         }
 
         Ok(results)
