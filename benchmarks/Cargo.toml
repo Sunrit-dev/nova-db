@@ -1,0 +1,13 @@
+[package]
+name = "nova-benchmarks"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+nova-core = { workspace = true }
+nova-client = { workspace = true }
+nova-server = { workspace = true }
+tokio = { workspace = true }
+tempfile = { workspace = true }

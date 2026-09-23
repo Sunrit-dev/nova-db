@@ -1,0 +1,12 @@
+[package]
+name = "nova-index"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Indexing engine, traits, primary key, hash, and ordered B-tree indexes for NOVA DB"
+
+[dependencies]
+nova-core = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }

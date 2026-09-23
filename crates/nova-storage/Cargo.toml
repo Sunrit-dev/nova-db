@@ -1,0 +1,21 @@
+[package]
+name = "nova-storage"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Storage engine, NBF binary format, WAL, crash recovery, snapshots, and fault injection for NOVA DB"
+
+[dependencies]
+nova-core = { workspace = true }
+byteorder = { workspace = true }
+crc32fast = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

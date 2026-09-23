@@ -1,0 +1,18 @@
+[package]
+name = "nova-testkit"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Testing harness, crash simulation, fault injection, and mock workloads for NOVA DB"
+
+[dependencies]
+nova-core = { workspace = true }
+nova-storage = { workspace = true }
+nova-server = { workspace = true }
+nova-client = { workspace = true }
+nova-protocol = { workspace = true }
+byteorder = { workspace = true }
+tempfile = { workspace = true }
+rand = { workspace = true }
+tokio = { workspace = true }

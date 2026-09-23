@@ -1,0 +1,7 @@
+/target
+**/*.rs.bk
+data/
+.nova_history
+*.snap
+*.wal
+.DS_Store

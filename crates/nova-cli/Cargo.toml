@@ -1,0 +1,31 @@
+[package]
+name = "nova-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Professional command-line tool, interactive shell, backup, and inspector for NOVA DB"
+
+[[bin]]
+name = "nova"
+path = "src/main.rs"
+
+[dependencies]
+nova-core = { workspace = true }
+nova-storage = { workspace = true }
+nova-server = { workspace = true }
+nova-client = { workspace = true }
+nova-protocol = { workspace = true }
+nova-query = { workspace = true }
+clap = { workspace = true }
+rustyline = { workspace = true }
+colored = { workspace = true }
+comfy-table = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+tempfile = { workspace = true }
+indicatif = { workspace = true }

@@ -1,0 +1,18 @@
+[package]
+name = "nova-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Core data model, typed values, documents, and data flow events for NOVA DB"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+byteorder = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

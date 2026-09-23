@@ -1,0 +1,23 @@
+[package]
+name = "nova-client"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Official asynchronous Rust client library for NOVA DB"
+
+[dependencies]
+nova-core = { workspace = true }
+nova-protocol = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+tokio-stream = { workspace = true }
+futures = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+nova-server = { workspace = true }

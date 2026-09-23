@@ -1,0 +1,15 @@
+[package]
+name = "nova-query"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "NQL (NOVA Query Language) lexer, AST, parser, planner, and evaluator"
+
+[dependencies]
+nova-core = { workspace = true }
+nova-index = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
