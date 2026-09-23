@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nova:
+    image: sunrit/nova-db:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nova-db
+    restart: unless-stopped
+    ports:
+      - "7400:7400" # NVP Binary Protocol
+      - "7401:7401" # NOVA Studio Web Console & REST
+    volumes:
+      - nova-data:/data
+    environment:
+      - RUST_LOG=info
+      - NOVA_SYNC_MODE=always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7401/api/status"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+
+volumes:
+  nova-data:
+    driver: local
