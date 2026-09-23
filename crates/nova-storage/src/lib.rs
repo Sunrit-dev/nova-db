@@ -13,7 +13,7 @@ pub use wal::{SyncMode, WriteAheadLog};
 #[cfg(test)]
 mod tests {
     use super::*;
-    use nova_core::document::Document;
+    use nova_core::document::{Document, DocumentId};
     use nova_core::value::Value;
     use std::fs::OpenOptions;
     use std::io::Write;
@@ -55,6 +55,32 @@ mod tests {
             restored_doc.get("name"),
             Some(&Value::String("Alice".to_string()))
         );
+    }
+
+    #[test]
+    fn test_nbf_zero_length_payload_record() {
+        let record = NbfRecord {
+            sequence: 404,
+            record_type: RecordType::Delete,
+            flags: 0,
+            tx_id: Some(12345),
+            timestamp: 1710000000,
+            namespace: "prod".to_string(),
+            collection: "tombstones".to_string(),
+            document_id: DocumentId::new("doc_dead").unwrap(),
+            payload: Vec::new(),
+        };
+
+        let encoded = record.encode().unwrap();
+        let mut cursor = std::io::Cursor::new(encoded);
+        let decoded = NbfRecord::decode(&mut cursor)
+            .unwrap()
+            .expect("zero-length payload record should decode");
+
+        assert_eq!(decoded.sequence, 404);
+        assert_eq!(decoded.record_type, RecordType::Delete);
+        assert_eq!(decoded.tx_id, Some(12345));
+        assert!(decoded.payload.is_empty());
     }
 
     #[test]
