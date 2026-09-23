@@ -592,6 +592,7 @@ impl DatabaseEngine {
             "sync_mode": self.config.sync_mode,
             "max_connections": self.config.max_connections,
             "metrics": {
+                "uptime_seconds": metrics.uptime_seconds,
                 "total_queries": metrics.total_queries,
                 "total_writes": metrics.total_writes,
                 "total_reads": metrics.total_reads,
