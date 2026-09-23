@@ -85,6 +85,8 @@ struct StudioArgs {
 struct StatusArgs {
     #[arg(short, long, default_value = "127.0.0.1:7400")]
     addr: String,
+    #[arg(long, help = "Output status in machine-readable JSON format")]
+    json: bool,
 }
 
 #[derive(Args)]
@@ -248,6 +250,19 @@ async fn cmd_status(args: StatusArgs) -> Result<(), Box<dyn std::error::Error>> 
 
     client.ping().await?;
     let rtt = start.elapsed();
+
+    if args.json {
+        let json_output = serde_json::json!({
+            "status": "online",
+            "server_address": args.addr,
+            "ping_rtt_micros": rtt.as_micros(),
+            "ping_rtt_human": format!("{:.2?}", rtt),
+            "protocol": "NVP/1.0",
+            "storage_format": "NBF/1.0"
+        });
+        println!("{}", serde_json::to_string_pretty(&json_output)?);
+        return Ok(());
+    }
 
     let mut table = Table::new();
     table
