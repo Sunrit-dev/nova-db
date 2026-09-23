@@ -596,7 +596,7 @@ dependencies = [
 
 [[package]]
 name = "nova-benchmarks"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "nova-client",
  "nova-core",
@@ -607,7 +607,7 @@ dependencies = [
 
 [[package]]
 name = "nova-cli"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "chrono",
  "clap",
@@ -631,7 +631,7 @@ dependencies = [
 
 [[package]]
 name = "nova-client"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "futures",
  "nova-core",
@@ -649,7 +649,7 @@ dependencies = [
 
 [[package]]
 name = "nova-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "byteorder",
  "chrono",
@@ -662,7 +662,7 @@ dependencies = [
 
 [[package]]
 name = "nova-examples"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "nova-client",
  "nova-core",
@@ -675,7 +675,7 @@ dependencies = [
 
 [[package]]
 name = "nova-index"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "nova-core",
  "thiserror",
@@ -684,7 +684,7 @@ dependencies = [
 
 [[package]]
 name = "nova-protocol"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "byteorder",
  "bytes",
@@ -700,7 +700,7 @@ dependencies = [
 
 [[package]]
 name = "nova-query"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "nova-core",
  "nova-index",
@@ -712,7 +712,7 @@ dependencies = [
 
 [[package]]
 name = "nova-server"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "bytes",
  "chrono",
@@ -737,7 +737,7 @@ dependencies = [
 
 [[package]]
 name = "nova-storage"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "byteorder",
  "chrono",
@@ -753,7 +753,7 @@ dependencies = [
 
 [[package]]
 name = "nova-testkit"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "byteorder",
  "nova-client",
