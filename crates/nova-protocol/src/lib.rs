@@ -96,4 +96,29 @@ mod tests {
         let parsed_resp = ResponsePayload::from_bytes(&rb).unwrap();
         assert_eq!(resp, parsed_resp);
     }
+
+    #[test]
+    fn test_concurrent_ping_pong_frames() {
+        let mut codec = NvpCodec::new();
+        let mut stream_buf = BytesMut::new();
+
+        // Encode 5 consecutive Ping frames
+        for req_id in 1000..1005 {
+            let frame = NvpFrame::new(FrameType::Ping, req_id, Vec::new());
+            codec.encode(frame, &mut stream_buf).unwrap();
+        }
+
+        // Decode them sequentially and verify request_id integrity
+        for expected_id in 1000..1005 {
+            let decoded = codec
+                .decode(&mut stream_buf)
+                .unwrap()
+                .expect("frame should decode successfully");
+            assert_eq!(decoded.frame_type, FrameType::Ping);
+            assert_eq!(decoded.request_id, expected_id);
+            assert!(decoded.payload.is_empty());
+        }
+
+        assert!(stream_buf.is_empty());
+    }
 }
